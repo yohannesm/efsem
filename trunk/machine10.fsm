@@ -1,0 +1,11 @@
+machine10
+
+INPUT_ALPHABET	:	abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-
+OUTPUT_ALPHABET	:       abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-
+MACHINE_TYPE	:	MEALY
+STARTING_STATE	:       Start
+
+
+Start		:	Start:{-/ } SawChar:{a/a, b/b, c/c, d/d, e/e, f/f, g/g}
+SawChar		:       SawChar:{a/a, b/b, c/c, d/d, e/e, f/f, g/g} SawWS:{-/-}
+SawWS		:	SawChar:{a/a, b/b, c/c, d/d, e/e, f/f, g/g} SawWS:{-/ }
