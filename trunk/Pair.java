@@ -4,21 +4,21 @@ import java.util.*;
 import java.io.*;
 
 //Marcell is driving
-public class Pair{
+public class Pair<T, S>{
 
-   private String first;
-   private char second;
+   private T first;
+   private S second;
 
-   public Pair(String a, char b){
+   public Pair(T a, S b){
      first = a;
      second = b;
    }
 
-   public String getFirst(){
+   public T getFirst(){
     return first;
    }
 
-   public String getSecond(){
+   public S getSecond(){
     return second;
    }
 
