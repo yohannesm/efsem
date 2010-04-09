@@ -13,7 +13,7 @@ public class Moore{
      private ArrayList<String> acceptingStates;
      private String currentState;
    
-   public Moore(ArrayList<String> s1, alphabet a1, HashMap<Pair, String> t1, String s2, 
+   public Moore(ArrayList<String> s1, alphabet a1, HashMap<Pair<String, char>, String> t1, String s2, 
    		 ArrayList<String> s3){
 	states = s1;
 	inputAlpha = a1;
@@ -40,6 +40,9 @@ public class Moore{
      }
    }
 
+   public void reset() {
+	currentState = startState;
+   }
 
    public static void main(String[] args){
    
