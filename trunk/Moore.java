@@ -8,7 +8,7 @@ public class Moore{
 
      private ArrayList<String> states;
      private alphabet inputAlpha;
-     private HashMap<Pair, String> trans;
+     private HashMap<Pair<String, char>, String> trans;
      private String startState;
      private ArrayList<String> acceptingStates;
      private String currentState;
@@ -31,7 +31,7 @@ public class Moore{
    public boolean step(char i){
       if(inputAlpha.valid(i)) {
       
-      Pair np = new Pair(currentState, i);
+      Pair<String, char> np = new Pair<String, char>(currentState, i);
       currentState = trans.get(np);
       return true;
      }
