@@ -8,14 +8,14 @@ public class Mealy{
 
      private ArrayList<String> states;
      private alphabet inputAlpha;
-     private HashMap<Pair<String, char>, Pair<String,String> > trans;
+     private HashMap<Pair<String, Character>, Pair<String,String> > trans;
      private String startState;
      private String currentState;
 
      private StringBuffer output;
      
    
-   public Mealy(ArrayList<String> s1, alphabet a1, HashMap<Pair<String, char>, Pair<String, String> > t1, String s2){
+   public Mealy(ArrayList<String> s1, alphabet a1, HashMap<Pair<String, Character>, Pair<String, String> > t1, String s2){
 	states = s1;
 	inputAlpha = a1;
 	trans = t1;
@@ -28,8 +28,9 @@ public class Mealy{
    
    public boolean step(char i){
       if(inputAlpha.valid(i)) {
-      
-      Pair<String, char> np = new Pair<String, char>(currentState, i);
+      Character getChar = new Character(i);
+
+      Pair<String, Character> np = new Pair<String, Character>(currentState, getChar);
       Pair<String, String> out = trans.get(np);
       currentState = out.getFirst();
       output.append(out.getSecond() );
