@@ -1,9 +1,11 @@
- 
-/David is driving
+import java.io.*;
+import java.util.*;
+
+//David is driving
 public class Mealy extends Machine{
 
      private ArrayList<String> states;
-     private alphabet inputAlpha;
+     private Alphabet inputAlpha;
      private HashMap<Pair<String, Character>, Pair<String,String> > trans;
      private String startState;
      private String currentState;
@@ -11,7 +13,7 @@ public class Mealy extends Machine{
      private StringBuffer output;
      
    
-   public Mealy(ArrayList<String> s1, alphabet a1, HashMap<Pair<String, Character>, Pair<String, String> > t1, String s2){
+   public Mealy(ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, Pair<String, String> > t1, String s2){
 	states = s1;
 	inputAlpha = a1;
 	trans = t1;
@@ -48,7 +50,7 @@ public class Mealy extends Machine{
    }
 
    public String run(String input) {
-       for (int i = 0; i < input.length; i++) {
+       for (int i = 0; i < input.length(); i++) {
 	   step(input.charAt(i) );
 	}
        return getOutput();
