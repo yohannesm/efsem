@@ -3,14 +3,14 @@
 public class Moore extends Machine{
 
      private ArrayList<String> states;
-     private alphabet inputAlpha;
+     private Alphabet inputAlpha;
      private HashMap<Pair<String, Character>, String> trans;
      private String startState;
      private ArrayList<String> acceptingStates;
      private String currentState;
      private ArrayList<String> finalStates;
    
-   public Moore(ArrayList<String> s1, alphabet a1, HashMap<Pair<String, Character>, String> t1, String s2, 
+   public Moore(ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, String> t1, String s2, 
    		 ArrayList<String> s3){
 	states = s1;
 	inputAlpha = a1;

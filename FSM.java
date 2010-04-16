@@ -39,6 +39,9 @@ public static Machine parseMachine(String input){
    Pattern sState = Pattern.compile("STARTING_STATE(\\s)+:(\\s)+");
    Pattern a = Pattern.compile("(\\S)+");
    Pattern mooreOrMealy = Pattern.compile("(MOORE|MEALY)");
+   Pattern MealyTransition = Pattern.compile("(\\S)+:\\{(\\D|(\\,\\s))*\\}");
+   Pattern MooreTransition = Pattern.compile("(\\S)+:\\{(\\S,\\s)+\\S\\}");
+   Pattern colonMatch = Pattern.compile("(\\s)*:(\\s)*");
    Matcher m = null;
 
    for(; line<lines.length && !machine_typeFound && !starting_stateFound; line++){
@@ -80,12 +83,112 @@ public static Machine parseMachine(String input){
        starting_stateFound = true;
      }
    }
+   if (machineType.equals("MEALY") ) {
+   ArrayList<String> states = new ArrayList<String>();
+   String currentState = null;
+   String nextState = null;
+   Character inputChar = null;
+   String outputString = null;
+   String transitionParse = null;
+   HashMap <Pair<String, Character>, Pair<String,String> > transitionFunction = new 		        HashMap<Pair<String, Character>, Pair<String, String> > ();
+      
+   
+   for(; line < lines.length; line++) {
+    
+        String testLine = lines[line];
+        
+   	m = a.matcher(testLine);
+   	
+   	if (m.find() ) {
+	        currentState = m.group();
+	        states.add(currentState);
+	        testLine = m.replaceFirst("");
+	        m = colonMatch.matcher(testLine);
+	        testLine = m.replaceFirst("");
+	        m = MealyTransition.matcher(testLine);
+	        String [] transitions = testLine.split("\\}(\\s)+(\\n)?");
+	        int num = transitions.length - 1;
+	        String lastTransition = transitions[num];
+	        int stringLen = lastTransition.length();
+	        
+	        if (lastTransition.charAt(stringLen - 1) == '}' ) {
+	        	transitions[num] = lastTransition.substring(0, stringLen - 1);
+	        }
+	        for (int i = 0; i < transitions.length; i++) {
+	        	String transition[] = transitions[i].split(":\\{");
+	        	nextState = transition[0];
+	        	String [] pairs = transition[1].split("\\,\\s");
+	        	for (int j = 0; j < pairs.length; j++) {
+	        		inputChar = new Character(pairs[j].charAt(0));
+	        		outputString = pairs[j].substring(2);
+	        		Pair<String, Character> strChr = new Pair<String, Character>(currentState, inputChar);
+	        		Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
+	        		transitionFunction.put(strChr, strStr);	        		
+	        	}
+	        }
+	        
+	}
+	
 
-   System.out.println(machineType);
-   System.out.println(start_state);
-   System.out.println(lines[7]);
 
-return null;
+   }
+   
+   Mealy mealyMachine = new Mealy(states, input_alphabet, transitionFunction, start_state);
+   return mealyMachine;
+   } else {
+   ArrayList<String> states = new ArrayList<String>();
+   ArrayList<String> acceptingStates = new ArrayList<String>();
+   ArrayList<String> finalStates = new ArrayList<String>();
+   String currentState = null;
+   String nextState = null;
+   Character inputChar = null;
+   String transitionParse = null;
+   HashMap <Pair<String, Character>, String > transitionFunction = new 		        HashMap<Pair<String, Character>, String > ();
+      
+   
+   for(; line < lines.length; line++) {
+    
+        String testLine = lines[line];
+        
+   	m = a.matcher(testLine);
+   	
+   	if (m.find() ) {
+	        currentState = m.group();
+	        states.add(currentState);
+	        testLine = m.replaceFirst("");
+	        m = colonMatch.matcher(testLine);
+	        testLine = m.replaceFirst("");
+	        m = MealyTransition.matcher(testLine);
+	        String [] transitions = testLine.split("\\}(\\s)+(\\n)?");
+	        int num = transitions.length - 1;
+	        String lastTransition = transitions[num];
+	        int stringLen = lastTransition.length();
+	        
+	        if (lastTransition.charAt(stringLen - 1) == '}' ) {
+	        	transitions[num] = lastTransition.substring(0, stringLen - 1);
+	        }
+	        for (int i = 0; i < transitions.length; i++) {
+	        	String transition[] = transitions[i].split(":\\{");
+	        	nextState = transition[0];
+	        	String [] pairs = transition[1].split("\\,\\s");
+	        	for (int j = 0; j < pairs.length; j++) {
+	        		inputChar = new Character(pairs[j].charAt(0));
+	        		outputString = pairs[j].substring(2);
+	        		Pair<String, Character> strChr = new Pair<String, Character>(currentState, inputChar);
+	        		Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
+	        		transitionFunction.put(strChr, strStr);	        		
+	        	}
+	        }
+	        
+	}
+	
+
+
+   }
+   
+   Mealy mealyMachine = new Mealy(states, input_alphabet, transitionFunction, start_state);
+   return mealyMachine;
+   }
 }//end parseMachine
 
 //Marcell is driving
