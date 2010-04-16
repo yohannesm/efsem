@@ -1,17 +1,17 @@
-/* alphabet.java */
+/* Alphabet.java */
 
 import java.util.*;
 import java.io.*;
 
 //david is driving
-public class alphabet{
+public class Alphabet{
         private String characters;
 
-        public alphabet() {
+        public Alphabet() {
            characters = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,~!@$#%^&-+{}.");
         }
 
-        public alphabet(String validAlphabet) {
+        public Alphabet(String validAlphabet) {
 	  if (validAlphabet == "|u") { characters = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
           else if (validAlphabet == "|l") { characters = new String("abcdefghijklmnopqrstuvwxyz"); }
           else if (validAlphabet == "|a") { characters = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
@@ -26,9 +26,9 @@ public class alphabet{
         }
 
 	public static void main(String[] args) {
-	  alphabet test1 = new alphabet();
-          alphabet test2 = new alphabet("|d");
-          alphabet test3 = new alphabet("01");
+	  Alphabet test1 = new Alphabet();
+          Alphabet test2 = new Alphabet("|d");
+          Alphabet test3 = new Alphabet("01");
 
           System.out.println(test1.valid('c'));
 	  System.out.println(test1.valid('|'));
@@ -41,4 +41,4 @@ public class alphabet{
 	  System.out.println(test3.valid('5'));
 
 	}//end main
-}//end alphabet
+}//end Alphabet
