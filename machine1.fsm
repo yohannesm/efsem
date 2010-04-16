@@ -7,6 +7,6 @@ STARTING_STATE	:       Start
 
 Start		:	StartZero:{0} NonZero:{|n}
 StartZero$	:       InvalidInput:{|d}
-InvalidInput!	:	
+InvalidInput!	:	InvalidInput:{|d}
 NonZero$	:	NonZero:{|d}
 

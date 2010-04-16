@@ -1,0 +1,13 @@
+machine4
+
+MACHINE_TYPE	:	MOORE
+STARTING_STATE	:       Start
+
+
+Start		:	O:{o} Start:{|s, |d, |u, a, b, c, d, e, f, g, h, i, j, k, l, m, n, p, q, r, s, t, u, v, w, x, y, z}
+O		:	Ol:{l} O:{o} Start:{|s, |d, |u, a, b, c, d, e, f, g, h, i, j, k, m, n, p, q, r, s, t, u, v, w, x, y, z}
+Ol		:       Oli:{i} O:{o} Start:{|s, |d, |u, a, b, c, d, e, f, g, h, j, k, l, m, n, p, q, r, s, t, u, v, w, x, y, z}
+Oli		:	Oliv:{v} O:{o} Start:{|s, |d, |u, a, b, c, d, e, f, g, h, i, j, k, l, m, n, p, q, r, s, t, u, w, x, y, z}
+Oliv		:	Olivi:{i} O:{o} Start:{|s, |d, |u, a, b, c, d, e, f, g, h, j, k, l, m, n, p, q, r, s, t, u, v, w, x, y, z}
+Olivi		:	Olivia:{a} O:{o} Start:{|s, |d, |u, b, c, d, e, f, g, h, i, j, k, l, m, n, p, q, r, s, t, u, v, w, x, y, z}
+Olivia$!	:	

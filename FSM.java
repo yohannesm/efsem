@@ -22,7 +22,6 @@ public static String read(String inFile) throws Exception {
 //David is driving
 public static Machine parseMachine(String input){
    String[] lines = input.split("\n");
-
    String name = lines[0].trim();
    Alphabet input_alphabet = null;
    Alphabet output_alphabet = null;
@@ -163,7 +162,6 @@ public static Machine parseMachine(String input){
 	        int num = transitions.length - 1;
 	        String lastTransition = transitions[num];
 	        int stringLen = lastTransition.length();
-	        
 	        if (lastTransition.charAt(stringLen - 1) == '}' ) {
 	        	transitions[num] = lastTransition.substring(0, stringLen - 1);
 	        }
@@ -173,10 +171,8 @@ public static Machine parseMachine(String input){
 	        	String [] pairs = transition[1].split("\\,\\s");
 	        	for (int j = 0; j < pairs.length; j++) {
 	        		inputChar = new Character(pairs[j].charAt(0));
-	        		outputString = pairs[j].substring(2);
 	        		Pair<String, Character> strChr = new Pair<String, Character>(currentState, inputChar);
-	        		Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
-	        		transitionFunction.put(strChr, strStr);	        		
+	        		transitionFunction.put(strChr, nextState);	        		
 	        	}
 	        }
 	        
@@ -186,8 +182,14 @@ public static Machine parseMachine(String input){
 
    }
    
-   Mealy mealyMachine = new Mealy(states, input_alphabet, transitionFunction, start_state);
-   return mealyMachine;
+   for ( Pair<String, Character> i  :  transitionFunction.keySet() ) {
+   	System.out.println(i.getFirst() );
+   	System.out.println(i.getSecond() );
+   	System.out.println( transitionFunction.get(i) );
+   	System.out.println("");
+   }
+   Moore mooreMachine = new Moore(states, input_alphabet, transitionFunction, start_state, acceptingStates);
+   return mooreMachine;
    }
 }//end parseMachine
 

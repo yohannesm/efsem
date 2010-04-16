@@ -1,4 +1,6 @@
- 
+import java.io.*;
+import java.util.*;
+
 //Marcell is driving
 public class Moore extends Machine{
 
@@ -56,14 +58,14 @@ public class Moore extends Machine{
 	return "REJECTING";
       }
    }
-}
+
 
    public String run(String input) {
-       for (int i = 0; i < input.length; i++) {
+       for (int i = 0; i < input.length(); i++) {
 	   step(input.charAt(i) );
 	}
        return getOutput();
     }	
-   }
+   
 
 }//end Moore Class

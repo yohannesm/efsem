@@ -1,0 +1,18 @@
+machine2
+
+INPUT_ALPHABET	:	|d,
+MACHINE_TYPE	:	MOORE
+STARTING_STATE	:       Start
+
+
+Start		:	StartZero:{0} Start1:{|n} Rejecting:{,}
+StartZero$	:       InvalidInput:{|d, ,}
+Rejecting!	:	Rejecting:{|d, ,}
+Start1$		:	Start2:{|d} Comma:{,}
+Start2$		:	Start3:{|d} Comma:{,}
+Start3$		:	Rejecting:{|d} Comma:{,}
+Comma		:	SeenOne:{|d} Rejecting:{,}
+SeenOne		:	SeenTwo:{|d} Rejecting:{,}
+SeenTwo		:	SeenThree:{|d} Rejecting:{,}
+SeenThree$	:	Comma:{,} Rejecting:{|d}
+

@@ -1,0 +1,12 @@
+machine7
+
+MACHINE_TYPE	:	MOORE
+STARTING_STATE	:       Start
+
+
+Start		:	OneParen:{{} Rejecting:{}} Start:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+OneParen	:	TwoParen:{{} Balanced:{}} OneParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+TwoParen	:	ThrParen:{{} OneParen:{}} TwoParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+ThrParen	:	Rejecting:{{} TwoParen:{}} ThrParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+Balanced$	:	OneParen:{{} Rejecting:{}} Balanced:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+Rejecting!	:
