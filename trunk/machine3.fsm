@@ -1,0 +1,13 @@
+machine3
+
+INPUT_ALPHABET	:	|d+-
+MACHINE_TYPE	:	MOORE
+STARTING_STATE	:       Start
+
+
+Start		:	StartZero:{0} NonZero:{|n} StartSign:{-, +}
+StartSign	:	NonZero:{|n} InvalidInput:{0, -, +}
+StartZero$	:       InvalidInput:{|d, -, +}
+InvalidInput!	:	InvalidInput:{|d, -, +}
+NonZero$	:	NonZero:{|d} InvalidInput:{-, +}
+
