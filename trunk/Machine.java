@@ -9,6 +9,8 @@ public abstract class Machine{
 
      public abstract String run(String input);
      
+     public abstract void reset();
+     
 
      public String name(){
            return name;

@@ -44,6 +44,7 @@ public static Machine parseMachine(String input){
    Pattern MealyTransition = Pattern.compile("(\\S)+:\\{(\\D|(\\,\\s))*\\}");
    Pattern MooreTransition = Pattern.compile("(\\S)+:\\{(\\S,\\s)+\\S\\}");
    Pattern colonMatch = Pattern.compile("(\\s)*:(\\s)*");
+   Pattern alphaNumeric = Pattern.compile("(\\w)+");
    Matcher m = null;
 
    for(; line<lines.length && !machine_typeFound && !starting_stateFound; line++){
@@ -152,12 +153,16 @@ public static Machine parseMachine(String input){
     
         String testLine = lines[line];
         
-   	m = a.matcher(testLine);
+   	m = alphaNumeric.matcher(testLine);
    	
    	if (m.find() ) {
 	        currentState = m.group();
 	        states.add(currentState);
 	        testLine = m.replaceFirst("");
+	        if (testLine.charAt(0) == '$' || testLine.charAt(1) == '$') acceptingStates.add(currentState);
+	        if (testLine.charAt(0) == '!' || testLine.charAt(1) == '!') finalStates.add(currentState);
+	        if (testLine.charAt(0) == '!' || testLine.charAt(0) == '$') testLine = testLine.substring(1);
+	        if (testLine.charAt(0) == '!' || testLine.charAt(0) == '$') testLine = testLine.substring(1);
 	        m = colonMatch.matcher(testLine);
 	        testLine = m.replaceFirst("");
 	        m = MealyTransition.matcher(testLine);
@@ -191,7 +196,9 @@ public static Machine parseMachine(String input){
    	System.out.println( transitionFunction.get(i) );
    	System.out.println("");
    }*/
-   Moore mooreMachine = new Moore(name, states, input_alphabet, transitionFunction, start_state, acceptingStates);
+   
+   Moore mooreMachine = new Moore(name, states, input_alphabet, transitionFunction, start_state, acceptingStates, finalStates);
+   //System.out.println(mooreMachine);
    return mooreMachine;
    }
 }//end parseMachine
@@ -230,10 +237,12 @@ public static ArrayList<String> inputParser(String inputString){
 		     }
 	     }
 	     else if(args[arg].equals("--verbose")){
-	           VERBOSE = true;
+	           //VERBOSE = true;
+	           Machine.verbose = true;
 	     }
 	     else if(args[arg].equals("--warnings")){
-	        WARNINGS = true;
+	        //WARNINGS = true;
+	        Machine.warning = true;
 	     }
 	     else if(args[arg].equals("--input")){
 	             boolean flag = true;
@@ -244,21 +253,22 @@ public static ArrayList<String> inputParser(String inputString){
 			  }
 		     }
 	     }
-	     else if(args[arg].equals("--unspecified-transition-trap")){
-	            UTT = true;
+	     else if(args[arg].equals("--unspecified-transitions-trap")){
+	            //UTT = true;
+	            Machine.utt = true;
 	     }
 	  }
 	  //convert the fsm into machines
 	  ArrayList<Machine> machineList = new ArrayList<Machine>();
 	  ArrayList<String> machineInputs = new ArrayList<String>();
-	  System.out.println("breakpt1");
+	  
 	  for(String i : fsmList){
 	        String fileReader = read(i);
 		Machine mach = parseMachine(fileReader);
 		if(mach!=null)
 			machineList.add( mach );
 	  }
-	  System.out.println("breakpt2");
+	
          //converts the input files into String array
 	  for(String i : inputList){
 	       String fileReader = read(i);
@@ -267,18 +277,17 @@ public static ArrayList<String> inputParser(String inputString){
 	  }
 	  
 
-	  System.out.println("breakpt3");
 	  for(Machine i : machineList){
-	        System.out.println(i);
+	        //System.out.println(i);
 	        for(String j : machineInputs){
 		   String output = i.run(j);
-		   System.out.println("breakpt4");
 		   if(i instanceof Moore){
 		      System.out.println( i.name() + " : " + " " +  output + " " + j);
 		   }
 		   else{
 		      System.out.println( i.name() + " : " +  j + " / " +  output);
 		   }
+		   i.reset();
 		}
 	  }
 
