@@ -1,0 +1,7 @@
+string1  :  1010101110001
+
+
+string2  :  qweiopjoliviaqjlasd
+
+
+string3  :  +379

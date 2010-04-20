@@ -21,5 +21,20 @@ public class Pair<T, S>{
    public S getSecond(){
     return second;
    }
+   
+   public String toString(){
+    StringBuffer result = new StringBuffer();
+    result.append("( ");
+    result.append(first.toString() );
+    result.append(", ");
+    result.append(second.toString() );
+    result.append(")");
 
+    return result.toString();
+   
+   }
+
+   public boolean equals(Pair<T, S> other){
+       return ((first.equals(other.getFirst()))  && (second.equals(other.getSecond())));
+   }
 }// end Pair Class

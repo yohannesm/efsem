@@ -4,7 +4,10 @@ import java.util.regex.*;
 
 //Marcell is driving
 public class FSM  {
-
+      
+      static boolean VERBOSE = false;
+      static boolean WARNINGS = false;
+      static boolean UTT = false;
 
 public static String read(String inFile) throws Exception {
 
@@ -132,7 +135,7 @@ public static Machine parseMachine(String input){
 
    }
    
-   Mealy mealyMachine = new Mealy(states, input_alphabet, transitionFunction, start_state);
+   Mealy mealyMachine = new Mealy(name, states, input_alphabet, transitionFunction, start_state);
    return mealyMachine;
    } else {
    ArrayList<String> states = new ArrayList<String>();
@@ -181,24 +184,111 @@ public static Machine parseMachine(String input){
 
 
    }
-   
+   /*
    for ( Pair<String, Character> i  :  transitionFunction.keySet() ) {
    	System.out.println(i.getFirst() );
    	System.out.println(i.getSecond() );
    	System.out.println( transitionFunction.get(i) );
    	System.out.println("");
-   }
-   Moore mooreMachine = new Moore(states, input_alphabet, transitionFunction, start_state, acceptingStates);
+   }*/
+   Moore mooreMachine = new Moore(name, states, input_alphabet, transitionFunction, start_state, acceptingStates);
    return mooreMachine;
    }
 }//end parseMachine
 
+public static ArrayList<String> inputParser(String inputString){
+      ArrayList<String> result = new ArrayList<String>();
+      String[] lines = inputString.split("\n");
+      Pattern p = Pattern.compile("(\\S)+(\\s)+:(\\s)+(\\S)+");
+      for(int i =0; i < lines.length ;i++){
+          //System.out.println(lines[i]);
+      		Matcher m = p.matcher(lines[i]);
+		if( m.matches() ){
+		   String[] line = lines[i].split(":");
+		   line[1] = line[1].trim();
+		   result.add(line[1]);
+		}
+      }
+      return result;
+}
+
+
 //Marcell is driving
       public static void main(String[] args) {
          try{
-	   String temp = read(args[0]);
-	   parseMachine(temp);
+	  ArrayList<String> fsmList = new ArrayList<String>();
+	  ArrayList<String> inputList = new ArrayList<String>();
+	  //getting all the arguments list
+	  for(int arg = 0; arg< args.length; arg++){
+	     if(args[arg].equals("--fsm")){
+	             boolean flag = true;
+	             for(int i = arg+1; i<args.length && flag; i++){
+		          if(args[i].contains("--")) flag = false;
+			  else{
+			  fsmList.add(args[i]);			  
+			  }
+		     }
+	     }
+	     else if(args[arg].equals("--verbose")){
+	           VERBOSE = true;
+	     }
+	     else if(args[arg].equals("--warnings")){
+	        WARNINGS = true;
+	     }
+	     else if(args[arg].equals("--input")){
+	             boolean flag = true;
+	             for(int i = arg+1; i<args.length && flag; i++){
+		          if(args[i].contains("--")) flag = false;
+			  else{
+			  inputList.add(args[i]);			  
+			  }
+		     }
+	     }
+	     else if(args[arg].equals("--unspecified-transition-trap")){
+	            UTT = true;
+	     }
+	  }
+	  //convert the fsm into machines
+	  ArrayList<Machine> machineList = new ArrayList<Machine>();
+	  ArrayList<String> machineInputs = new ArrayList<String>();
+	  System.out.println("breakpt1");
+	  for(String i : fsmList){
+	        String fileReader = read(i);
+		Machine mach = parseMachine(fileReader);
+		if(mach!=null)
+			machineList.add( mach );
+	  }
+	  System.out.println("breakpt2");
+         //converts the input files into String array
+	  for(String i : inputList){
+	       String fileReader = read(i);
+	       ArrayList<String> temp1 = inputParser(fileReader);
+	       machineInputs.addAll(temp1);
+	  }
+	  
 
+	  System.out.println("breakpt3");
+	  for(Machine i : machineList){
+	        System.out.println(i);
+	        for(String j : machineInputs){
+		   String output = i.run(j);
+		   System.out.println("breakpt4");
+		   if(i instanceof Moore){
+		      System.out.println( i.name() + " : " + " " +  output + " " + j);
+		   }
+		   else{
+		      System.out.println( i.name() + " : " +  j + " / " +  output);
+		   }
+		}
+	  }
+
+	   /*String temp = read(args[0]);
+	   //parseMachine(temp);
+	   ArrayList<String> inputStr = inputParser(temp);
+	   for(String i : inputStr){
+	      System.out.println(i);
+	   }
+          */
 	 }//end try
 
 	 catch(Exception e){

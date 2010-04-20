@@ -12,8 +12,9 @@ public class Moore extends Machine{
      private String currentState;
      private ArrayList<String> finalStates;
    
-   public Moore(ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, String> t1, String s2, 
+   public Moore(String name1, ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, String> t1, String s2, 
    		 ArrayList<String> s3){
+        name = name1;
 	states = s1;
 	inputAlpha = a1;
 	trans = t1;
@@ -67,5 +68,32 @@ public class Moore extends Machine{
        return getOutput();
     }	
    
+   public String toString(){
+     StringBuffer result = new StringBuffer();
+     result.append("Alphabet = ");
+     result.append(inputAlpha.toString());
+     result.append("\n");
+     result.append("States = ");
+     result.append(states.toString());
+     result.append("\n");
+     result.append("Transitions = ");
+     result.append(trans.toString());
+     result.append("\n");
+     result.append("start state = ");
+     result.append(startState.toString());
+     result.append("\n");
+     result.append("accepting state(s) = ");
+     result.append(acceptingStates.toString());
+     result.append("\n");
+     result.append("current state(s) = ");
+     result.append(currentState.toString());
+     result.append("\n");
+     result.append("final state(s) = ");
+     result.append(finalStates.toString());
+     result.append("\n");
+
+
+     return result.toString();
+   }
 
 }//end Moore Class
