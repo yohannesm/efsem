@@ -25,6 +25,10 @@ public class Alphabet{
 	  return characters.contains(String.valueOf(testChar));
         }
 
+	public String toString(){
+	    return characters;
+	}
+
 	public static void main(String[] args) {
 	  Alphabet test1 = new Alphabet();
           Alphabet test2 = new Alphabet("|d");

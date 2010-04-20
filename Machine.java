@@ -4,7 +4,15 @@ import java.io.*;
 public abstract class Machine{
      public static boolean verbose = false;
      public static boolean warning = false;
-     public static boolean trap = false;
+     public static boolean utt = false;
+     protected String name = null;
+
+     public abstract String run(String input);
+     
+
+     public String name(){
+           return name;
+     }
 }
 
 
