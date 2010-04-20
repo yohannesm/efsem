@@ -24,6 +24,13 @@ public class Alphabet{
         public boolean valid(char testChar) {
 	  return characters.contains(String.valueOf(testChar));
         }
+        
+        public boolean valid(String testString) {
+          for (int i = 0; i < testString.length(); i++) {
+           if (!valid(testString.charAt(i))) return false;
+          }
+          return true;
+        }
 
 	public String toString(){
 	    return characters;

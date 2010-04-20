@@ -24,7 +24,7 @@ public class Pair<T, S>{
    
    public String toString(){
     StringBuffer result = new StringBuffer();
-    result.append("( ");
+    result.append("(");
     result.append(first.toString() );
     result.append(", ");
     result.append(second.toString() );
