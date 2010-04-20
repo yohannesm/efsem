@@ -4,3 +4,21 @@ INPUT_ALPHABET	:	01#
 OUTPUT_ALPHABET	:       01
 MACHINE_TYPE	:	MEALY
 STARTING_STATE	:       Start
+
+NCNE		:	NCNEZero:{0/} NCNeOne:{1/} NC1EChar:(#/)
+NCNEZero	:	NCNE:{0/0, 1/1} C2E:{#/0}
+NCNEOne		:	NCNE:{0/1} CNE:{1/0} C2E:{#/1}
+CNE		:	CNEZero:{0/} CNEOne:{1/} C1EChar:(#/)
+CNEZero		:       NCNE:{0/1} CNE:{1/0} NC2E:{#/1}
+CNEOne		:	CNE:{0/0, 1/1} C2E:{#/0}
+NC1E		:	NC1EChar:{#/} End:{1/, 0/}
+NC1EChar	:       NC1E:{1/1, 0/0} End:{#/#}
+C1E		:	C1EChar:{#/} End:{1/, 0/}
+C1EChar		:       C1E:{1/0} NC1E:{0/1} End:{#/#}
+NC2E		:	NC2EZero:{0/} NC2EOne:{1/} End:{#/}
+NC2EZero	:	End:{0/#, 1/#} NC2E:{#/0}
+NC2EOne		:       End:{0/#, 1/#} NC2E:{#/1}
+C2E		:       C2EZero:{0/} C2EOne:{1/} End:{#/}
+C2EZero		:       End:{1/#, 0/#} NC2E:{#/1}
+C2EOne		:       End:{1/#, 0/#} C2E:{#/0}
+End		:	End:{1/, 0/, #/}

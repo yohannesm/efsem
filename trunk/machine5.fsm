@@ -1,0 +1,13 @@
+machine5
+
+OUTPUT_ALPHABET	:	01
+MACHINE_TYPE	:	MEALY
+STARTING_STATE	:       Start
+
+
+Start		:	O:{o/0} Start:{|s/0, |d/0, |u/0, a/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, i/0, j/0, k/0, l/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, v/0, w/0, x/0, y/0, z/0}
+O		:	Ol:{l/0} O:{o/0} Start:{|s/0, |d/0, |u/0, a/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, i/0, j/0, k/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, v/0, w/0, x/0, y/0, z/0}
+Ol		:       Oli:{i/0} O:{o/0} Start:{|s/0, |d/0, |u/0, a/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, j/0, k/0, l/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, v/0, w/0, x/0, y/0, z/0}
+Oli		:	Oliv:{v/0} O:{o/0} Start:{|s/0, |d/0, |u/0, a/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, i/0, j/0, k/0, l/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, w/0, x/0, y/0, z/0}
+Oliv		:	Olivi:{i/0} O:{o/0} Start:{|s/0, |d/0, |u/0, a/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, j/0, k/0, l/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, v/0, w/0, x/0, y/0, z/0}
+Olivi		:	Start:{a/1} O:{o/0} Start:{|s/0, |d/0, |u/0, b/0, c/0, d/0, e/0, f/0, g/0, h/0, i/0, j/0, k/0, l/0, m/0, n/0, p/0, q/0, r/0, s/0, t/0, u/0, v/0, w/0, x/0, y/0, z/0}
