@@ -28,6 +28,7 @@ public static Machine parseMachine(String input){
    String name = lines[0].trim();
    Alphabet input_alphabet = null;
    Alphabet output_alphabet = null;
+   Alphabet default_alphabet = new Alphabet();
    String machineType = null;
    String start_state = null;
    int line = 1;
@@ -40,7 +41,8 @@ public static Machine parseMachine(String input){
    Pattern mType = Pattern.compile("MACHINE_TYPE(\\s)+:(\\s)+");
    Pattern sState = Pattern.compile("STARTING_STATE(\\s)+:(\\s)+");
    Pattern a = Pattern.compile("(\\S)+");
-   Pattern mooreOrMealy = Pattern.compile("(MOORE|MEALY)");
+   Pattern moorePattern = Pattern.compile("(\\s)*:(\\s)*MOORE(\\s)*");
+   pattern mealyPattern = Pattern.compile("(\\s)*:(\\s)*MEALY(\\s)*");
    Pattern MealyTransition = Pattern.compile("(\\S)+:\\{(\\D|(\\,\\s))*\\}");
    Pattern MooreTransition = Pattern.compile("(\\S)+:\\{(\\S,\\s)+\\S\\}");
    Pattern colonMatch = Pattern.compile("(\\s)*:(\\s)*");
@@ -70,11 +72,21 @@ public static Machine parseMachine(String input){
      m = mType.matcher(testLine);
      if (m.find() && !machine_typeFound) {
          testLine = m.replaceFirst("");
-         m = mooreOrMealy.matcher(testLine);
-         if (m.find() ) {
-           machineType = m.group();
+         m = moorePattern(testLine);
+         if (m.matches() ) {
+           machineType = "MOORE";
          }
-         output_alphaFound = true;         
+         else {
+         m = mealyPattern(testLine);
+         if (m.matches() ) {
+           machineType = "MEALY";
+         }
+         else {
+           System.out.println("FSM FILE ERROR: " + name + " : MACHINE_TYPE HAS INVALID VALUE");
+           return false;
+         }
+         }
+         machine_typeFound = true;         
      }
      m = sState.matcher(testLine);
      if (m.find() ) {
@@ -85,6 +97,14 @@ public static Machine parseMachine(String input){
        }
        starting_stateFound = true;
      }
+   }
+   if ( !machine_typeFound ) {
+   	System.out.println("FSM FILE ERROR: " + name + " : MACHINE_TYPE IS MISSING");
+   	return null;
+   }
+   if ( !starting_statefound ) {
+   	System.out.println("FSM FILE ERROR: " + name + " : STARTING_STATE IS MISSING");
+   	return null;
    }
    if (machineType.equals("MEALY") ) {
    ArrayList<String> states = new ArrayList<String>();
@@ -120,13 +140,29 @@ public static Machine parseMachine(String input){
 	        for (int i = 0; i < transitions.length; i++) {
 	        	String transition[] = transitions[i].split(":\\{");
 	        	nextState = transition[0];
-	        	String [] pairs = transition[1].split("\\,\\s");
+	        	String [] pairs = transition[1].split("\\,(\\s)+");
 	        	for (int j = 0; j < pairs.length; j++) {
+	        	  if ( pairs[j].charAt(0) != '|' ) {
+	        	        if ( pairs[j].length() < 2 || pairs[j].charAt(1) != '/' ) {
+	        	          System.out.println("ERROR: " + name + " : INVALID TRANSITION FOR "
+	        	          		+ "MEALY ON LINE " + String.valueOf(line + 1));
+	        	          return null;
+	        	        }
 	        		inputChar = new Character(pairs[j].charAt(0));
 	        		outputString = pairs[j].substring(2);
+	        		outputString.replace("|a", "|l|u");
+	        		outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
+	        		outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	        		outputString.replace("|d", "0123456789");
+	        		outputString.replace("|n", "123456789");
+	        		outputString.replace("|s", ".,~!@$#%^&-+{}");
 	        		Pair<String, Character> strChr = new Pair<String, Character>(currentState, inputChar);
 	        		Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
 	        		transitionFunction.put(strChr, strStr);	        		
+	        	   }
+	        	 else {
+	        	 	
+	        	 }
 	        	}
 	        }
 	        
@@ -176,12 +212,48 @@ public static Machine parseMachine(String input){
 	        for (int i = 0; i < transitions.length; i++) {
 	        	String transition[] = transitions[i].split(":\\{");
 	        	nextState = transition[0];
-	        	String [] pairs = transition[1].split("\\,\\s");
+	        	String [] pairs = transition[1].split("\\,(\\s)+");
 	        	for (int j = 0; j < pairs.length; j++) {
+	        		if ( pairs[j].length() > 1 && pairs[j].charAt(0) != '|' && pairs[j].charAt(1) == '\') {
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID TRANSITION FOR "
+	        	          		+ "MOORE ON LINE " + String.valueOf(line + 1));
+	        	          return null;
+	        	        }
+	        	        if ( pairs[j].length() > 2 && pairs[j].charAt(0) == '|' && pairs[j.charAt(2) == '\') {
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID TRANSITION FOR "
+	        	          		+ "MOORE ON LINE " + String.valueOf(line + 1));
+	        	          return null;
+	        	        }
+	        	        if ( pairs[j].length() > 1 && pairs[j].charAt(0) != '|') {
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
+	        	          		+ "LINE " + String.valueOf(line + 1));
+	        	          return null;
+	        	        }
+	        	        if ( pairs[j].length() > 2 && pairs[j].charAt(0) == '|') {
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
+	        	          		+ "LINE " + String.valueOf(line + 1));
+	        	          return null;
+	        	        }
+	        	        if ( pairs[j].charAt(0) != '|' && !input_alphabet.valid(pairs[j].charAt(0) )){
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID TRANSITION "
+	        	          	+ "SYMBOL ON LINE " + String.valueOf(line + 1));
+	        	        }
+	        	        
 	        		inputChar = new Character(pairs[j].charAt(0));
 	        		Pair<String, Character> strChr = new Pair<String, Character>(currentState, inputChar);
 	        		transitionFunction.put(strChr, nextState);	        		
 	        	}
+	        }
+	        ArrayList< Character > deterministicCheck = new ArrayList<Character> ();
+	        for (Pair<String, Character> key : transitionFunction.keySet() {
+	          if (key.getFirst().equals(currentState) {
+	            if ( ArrayList.contains( key.getSecond() ) {
+	              System.out.println("FSM FILE ERROR: " + name + " : NON-DETERMINISTIC TRANSITION " +
+	              		+ "TABLE FOR STATE " + currentState);
+	              	return null;
+	            }
+	            ArrayList.add(key.getSecond() )
+	          }
 	        }
 	        
 	}

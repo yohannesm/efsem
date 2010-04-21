@@ -1,13 +1,13 @@
 machine6
 
-INPUT_ALPHABET	:	|d.
+INPUT_ALPHABET	:	|d|s
 MACHINE_TYPE	:	MOORE
 STARTING_STATE	:       Start
 
 
-Start		:	StartZero:{0} StartNon:{|n} Rejecting:{.}
-StartZero	:	Rejecting:{|d} Period:{.}
-StartNon	:	StartNon:{|d} Period:{.}
-Period		:	Accepting:{|d} Rejecting:{.}
-Accepting$	:	Accepting:{|d} Rejecting:{.}
+Start		:	StartZero:{0} StartNon:{|n} Rejecting:{|s}
+StartZero	:	Rejecting:{|d, ,, ~, !, @, $, #, %, ^, &, -, +, {, }} Period:{.}
+StartNon	:	StartNon:{|d} Period:{.} Rejecting:{|d, ,, ~, !, @, $, #, %, ^, &, -, +, {, }}
+Period		:	Accepting:{|d} Rejecting:{|s}
+Accepting$	:	Accepting:{|d} Rejecting:{|s}
 Rejecting!	:

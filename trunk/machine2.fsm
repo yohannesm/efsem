@@ -1,18 +1,18 @@
 machine2
 
-INPUT_ALPHABET	:	|d,
+INPUT_ALPHABET	:	|d|s
 MACHINE_TYPE	:	MOORE
 STARTING_STATE	:       Start
 
 
-Start		:	StartZero:{0} Start1:{|n} Rejecting:{,}
-StartZero$	:       InvalidInput:{|d, ,}
-Rejecting!	:	Rejecting:{|d, ,}
-Start1$		:	Start2:{|d} Comma:{,}
-Start2$		:	Start3:{|d} Comma:{,}
-Start3$		:	Rejecting:{|d} Comma:{,}
-Comma		:	SeenOne:{|d} Rejecting:{,}
-SeenOne		:	SeenTwo:{|d} Rejecting:{,}
-SeenTwo		:	SeenThree:{|d} Rejecting:{,}
-SeenThree$	:	Comma:{,} Rejecting:{|d}
+Start		:	StartZero:{0} Start1:{|n} Rejecting:{|s}
+StartZero$	:       InvalidInput:{|d, |s}
+Rejecting!	:
+Start1$		:	Start2:{|d} Comma:{,} Rejecting:{., ~, !, @, $, #, %, ^, &, -, +, {, }}
+Start2$		:	Start3:{|d} Comma:{,} Rejecting:{., ~, !, @, $, #, %, ^, &, -, +, {, }}
+Start3$		:	Rejecting:{|d, ., ~, !, @, $, #, %, ^, &, -, +, {, }} Comma:{,}
+Comma		:	SeenOne:{|d} Rejecting:{|s}
+SeenOne		:	SeenTwo:{|d} Rejecting:{|s}
+SeenTwo		:	SeenThree:{|d} Rejecting:{|s}
+SeenThree$	:	Comma:{,} Rejecting:{|d, ., ~, !, @, $, #, %, ^, &, -, +, {, }}
 
