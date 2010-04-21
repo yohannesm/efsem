@@ -6,19 +6,32 @@ import java.io.*;
 //david is driving
 public class Alphabet{
         private String characters;
+        private static String defA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,~!@$#%^&-+{}";
 
         public Alphabet() {
-           characters = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,~!@$#%^&-+{}.");
+           characters = new String(defA);
         }
 
         public Alphabet(String validAlphabet) {
-	  if (validAlphabet == "|u") { characters = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
-          else if (validAlphabet == "|l") { characters = new String("abcdefghijklmnopqrstuvwxyz"); }
-          else if (validAlphabet == "|a") { characters = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
-	  else if (validAlphabet == "|d") { characters = new String("0123456789"); }
-          else if (validAlphabet == "|n") { characters = new String("123456789"); }
-          else if (validAlphabet == "|s") { characters = new String(".,~!@$#%^&-+{}."); }
-          else { characters = new String(validAlphabet);}
+	  characters = new String(validAlphabet);	  
+	  characters.replace("|a", "|l|u");
+	  characters.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	  characters.replace("|l", "abcdefghijklmnopqrstuvwxyz");
+	  characters.replace("|n", "123456789");
+	  characters.replace("|d", "0123456789");
+	  characters.replace("|s", ".,~!@$#%^&-+{}");
+	}
+	
+	public boolean validAlphabet() {
+	  for (int i = 0; i < characters.length(); i++) {
+	    char testChar = characters.charAt(i);
+	    if ( !defA.contains(String.valueOf(testChar)) ) return false;
+	    
+	    for (int j = i + 1; j < characters.length(); j++) {
+	      if ( testChar == characters.charAt(j) ) return false;
+	    }
+	  }
+	  return true;
 	}
 
         public boolean valid(char testChar) {

@@ -1,12 +1,11 @@
 machine1
 
-INPUT_ALPHABET	:	|d
 MACHINE_TYPE	:	MOORE
 STARTING_STATE	:       Start
 
 
-Start		:	StartZero:{0} NonZero:{|n}
-StartZero$	:       InvalidInput:{|d}
-InvalidInput!	:	InvalidInput:{|d}
-NonZero$	:	NonZero:{|d}
+Start		:	StartZero:{0} NonZero:{|n} InvalidInput: {|a, |s}
+StartZero$	:       InvalidInput:{|d, |a, |s}
+InvalidInput!	:
+NonZero$	:	NonZero:{|d} InvalidInput: {|a, |s}
 
