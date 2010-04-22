@@ -84,14 +84,14 @@ public static Machine parseMachine(String input){
      m7 = a.matcher(testLine);
      
      if ( !m1.matches() && !m2.matches() && !m3.matches() && !m4.matches() && !m5.matches() && !m6.matches()  && m7.find()) {
-     	System.out.println("FSM FILE ERROR: " + name + " : INVA8LID FORMATTING ON LINE " + 
+     	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE " + 
      		String.valueOf(line + 1));
      	return null;
      }
      
      if (m1.matches() ) {
 	     if (input_alphaFound) {
-     		System.out.println("FSM FILE ERROR: " + name + " : INVaALID FORMATTING ON LINE "
+     		System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
 	         		+ String.valueOf(line + 1));
         	 return null;
 	     }
@@ -101,7 +101,7 @@ public static Machine parseMachine(String input){
          input_alphabet = new Alphabet( testLine );
          m = ws.matcher(testLine);
          if ( m.find() ) {
-         	System.out.println("FSM FILE ERROR: " + name + " : INVALI2D FORMATTING ON LINE "
+         	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
          		+ String.valueOf(line + 1));
          	return null;
          }
@@ -115,7 +115,7 @@ public static Machine parseMachine(String input){
     
      if (m2.matches()) {
          if (output_alphaFound) {
-     	System.out.println("FSM FILE ERROR: " + name + " : INVALID1 FORMATTING ON LINE "
+     	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
          		+ String.valueOf(line + 1));
          return null;
  	    }
@@ -125,7 +125,7 @@ public static Machine parseMachine(String input){
          output_alphabet = new Alphabet( testLine );
          m = ws.matcher(testLine);
          if ( m.find() ) {
-         	System.out.println("FSM FILE ERROR: " + name + " : INVALID2 FORMATTING ON LINE "
+         	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
          		+ String.valueOf(line + 1));
          }
          if ( !output_alphabet.validAlphabet() ) {
@@ -139,7 +139,7 @@ public static Machine parseMachine(String input){
      
      if (m3.matches()) {
    	  if (machine_typeFound) {
-   	  	System.out.println("FSM FILE ERROR: " + name + " : INVALID3 FORMATTING ON LINE "
+   	  	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
   	       		+ String.valueOf(line + 1));
  	        return null;
  	    }
@@ -149,7 +149,7 @@ public static Machine parseMachine(String input){
          machineType = testLine;
          m = ws.matcher(testLine);
          if ( m.find() ) {
-         	System.out.println("FSM FILE ERROR: " + name + " : INVALID4 FORMATTING ON LINE "
+         	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
          		+ String.valueOf(line + 1));
          	return null;
          }
@@ -164,7 +164,7 @@ public static Machine parseMachine(String input){
      
      if (m4.matches() ) {  
 	     if (starting_stateFound) {
-	     	System.out.println("FSM FILE ERROR: " + name + " : INVALI5D FORMATTING ON LINE "
+	     	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
 	         		+ String.valueOf(line + 1));
 	         return null;
 	     }
@@ -174,7 +174,7 @@ public static Machine parseMachine(String input){
        start_state = testLine;
        m = ws.matcher(testLine);
        if (m.find() ) {
-         System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMAT6TING ON LINE "
+         System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON LINE "
          		+ String.valueOf(line + 1));
          	return null;
        }
@@ -510,18 +510,18 @@ public static ArrayList<String> inputParser(String inputString){
 		if( m.find() ){
 		   String[] line = lines[i].split(":");
 		   if(line.length<2 || (line.length == 2 && line[1].trim().equals(""))) 
-		    System.out.println( line[0] + " : " + 
+		    System.out.println( "INPUT FILE ERROR: " + line[0] + " : " + 
 		   		"MISSING INPUT STRING ON LINE " + String.valueOf(i+1) );
 		   else if(line.length>2)
-		    System.out.println( line[0] + " : " + 
+		    System.out.println( "INPUT FILE ERROR: " + line[0] + " : " + 
 		   		"MULTIPLE STRINGS ON LINE " + String.valueOf(i+1) );
 		   else if( (line[0].trim()).equals("") )
-		    System.out.println( line[0] + " : " + 
+		    System.out.println( "INPUT FILE ERROR: " + line[0] + " : " + 
 		   		"MISSING NAME  ON LINE " + String.valueOf(i+1) );
 		   else{
 		   line[1] = line[1].trim();
 		   if( line[1].contains(" ") ) 
-		   System.out.println( line[0] + " : " + 
+		   System.out.println( "INPUT FILE ERROR: " + line[0] + " : " + 
 		   		"MULTIPLE STRINGS ON LINE " + String.valueOf(i+1) );
 		   else result.add(line[1]);
 		   }

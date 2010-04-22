@@ -7,7 +7,7 @@ STARTING_STATE	:       Start
 
 Start		:	StartZero:{0} StartNon:{|n} Rejecting:{|s}
 StartZero	:	Rejecting:{|d, ,, ~, !, @, $, #, %, ^, &, -, +, {, }} Period:{.}
-StartNon	:	StartNon:{|d} Period:{.} Rejecting:{|d, ,, ~, !, @, $, #, %, ^, &, -, +, {, }}
+StartNon	:	StartNon:{|d} Period:{.} Rejecting:{,, ~, !, @, $, #, %, ^, &, -, +, {, }}
 Period		:	Accepting:{|d} Rejecting:{|s}
 Accepting$	:	Accepting:{|d} Rejecting:{|s}
 Rejecting!	:

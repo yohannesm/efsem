@@ -13,13 +13,13 @@ public class Alphabet{
         }
 
         public Alphabet(String validAlphabet) {
-	  characters = new String(validAlphabet);	  
-	  characters.replace("|a", "|l|u");
-	  characters.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	  characters.replace("|l", "abcdefghijklmnopqrstuvwxyz");
-	  characters.replace("|n", "123456789");
-	  characters.replace("|d", "0123456789");
-	  characters.replace("|s", ".,~!@$#%^&-+{}");
+	  characters = new String(validAlphabet);  
+	  characters = characters.replace("|a", "|l|u");
+	  characters = characters.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	  characters = characters.replace("|l", "abcdefghijklmnopqrstuvwxyz");
+	  characters = characters.replace("|n", "123456789");
+	  characters = characters.replace("|d", "0123456789");
+	  characters = characters.replace("|s", ".,~!@$#%^&-+{}");
 	}
 	
 	public boolean validAlphabet() {
