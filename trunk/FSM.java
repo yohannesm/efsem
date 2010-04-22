@@ -270,13 +270,13 @@ public static Machine parseMachine(String input){
 	        	          return null;
 	        	        }
 	        		inputChar = new Character(pairs[j].charAt(0));
-	        		outputString = pairs[j].substring(2);
-	        		outputString.replace("|a", "|l|u");
-	        		outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
-	        		outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	        		outputString.replace("|d", "0123456789");
-	        		outputString.replace("|n", "123456789");
-	        		outputString.replace("|s", ".,~!@$#%^&-+{}");	        		
+	        		outputString = pairs[j].substring(3);
+	        		 outputString = outputString.replace("|a", "|l|u");
+	        		 outputString = outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
+	        		 outputString = outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	        		 outputString = outputString.replace("|d", "0123456789");
+	        		 outputString = outputString.replace("|n", "123456789");
+	        		 outputString = outputString.replace("|s", ".,~!@$#%^&-+{}");	        			        		
 	        		if ( !output_alphabet.valid( outputString )) {
 	        		  System.out.println("FSM FILE ERROR: " + name + " : INVALID OUTPUT SYMBOL " +
 	        		  	" ON LINE " + String.valueOf(line + 1));
@@ -319,12 +319,12 @@ public static Machine parseMachine(String input){
 	        	 	for (int x = 0; x < shortcut.length(); x++ ) {
 	        	 	 inputChar = new Character(shortcut.charAt(x));
 	        		 outputString = pairs[j].substring(3);
-	        		 outputString.replace("|a", "|l|u");
-	        		 outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
-	        		 outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	        		 outputString.replace("|d", "0123456789");
-	        		 outputString.replace("|n", "123456789");
-	        		 outputString.replace("|s", ".,~!@$#%^&-+{}");	        		
+	        		 outputString = outputString.replace("|a", "|l|u");
+	        		 outputString = outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
+	        		 outputString = outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	        		 outputString = outputString.replace("|d", "0123456789");
+	        		 outputString = outputString.replace("|n", "123456789");
+	        		 outputString = outputString.replace("|s", ".,~!@$#%^&-+{}");	        		
 	        		 if ( !output_alphabet.valid( outputString )) {
 	        		   System.out.println("FSM FILE ERROR: " + name + " : INVALID OUTPUT SYMBOL " +
 	        		   	" ON LINE " + String.valueOf(line + 1));
