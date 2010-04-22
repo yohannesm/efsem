@@ -11,6 +11,7 @@ public abstract class Machine{
      
      public abstract void reset();
      
+     public abstract String getMachineType();
 
      public String name(){
            return name;

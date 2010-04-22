@@ -23,6 +23,7 @@ public class Moore extends Machine{
      public ArrayList<String> getFinalStates() { return finalStates; }
      public int getStepNumber() { return stepNumber; }
      public boolean isValidInput() { return !invalidInput; }
+     public String getMachineType() { return "MOORE"; }
    
    public Moore(String name1, ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, String> t1, String s2, 
    		 ArrayList<String> s3, ArrayList<String> finals){
