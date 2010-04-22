@@ -503,14 +503,28 @@ public static Machine parseMachine(String input){
 public static ArrayList<String> inputParser(String inputString){
       ArrayList<String> result = new ArrayList<String>();
       String[] lines = inputString.split("\n");
-      Pattern p = Pattern.compile("(\\S)+(\\s)+:(\\s)+(\\S)+");
+      Pattern p = Pattern.compile(":");
       for(int i =0; i < lines.length ;i++){
           //System.out.println(lines[i]);
       		Matcher m = p.matcher(lines[i]);
-		if( m.matches() ){
+		if( m.find() ){
 		   String[] line = lines[i].split(":");
+		   if(line.length<2 || (line.length == 2 && line[1].trim().equals(""))) 
+		    System.out.println( line[0] + " : " + 
+		   		"MISSING INPUT STRING ON LINE " + String.valueOf(i+1) );
+		   else if(line.length>2)
+		    System.out.println( line[0] + " : " + 
+		   		"MULTIPLE STRINGS ON LINE " + String.valueOf(i+1) );
+		   else if( (line[0].trim()).equals("") )
+		    System.out.println( line[0] + " : " + 
+		   		"MISSING NAME  ON LINE " + String.valueOf(i+1) );
+		   else{
 		   line[1] = line[1].trim();
-		   result.add(line[1]);
+		   if( line[1].contains(" ") ) 
+		   System.out.println( line[0] + " : " + 
+		   		"MULTIPLE STRINGS ON LINE " + String.valueOf(i+1) );
+		   else result.add(line[1]);
+		   }
 		}
       }
       return result;
