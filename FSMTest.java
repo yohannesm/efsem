@@ -16,7 +16,7 @@ public class FSMTest {
          "\n" +
          "\n" +
          "start       :  sawdigit   : {|d}    sawcomma :  {,}\n" +
-         "sawdigit!$  :    {}\n" +
+         "sawdigit!$  :    sawcomma:{}\n" +
          "sawcomma!   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
@@ -45,7 +45,7 @@ public class FSMTest {
          "\n" +
          "\n" +
          "start       :  sawdigit   : {|d}    sawcomma :  {,}\n" +
-         "sawdigit!$  :    {}\n" +
+         "sawdigit!$  :    sawcomma:{}\n" +
          "sawcomma!   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
@@ -66,7 +66,7 @@ public class FSMTest {
          "OUTPUT_ALPHABET: |d,\n" +
          "\n" +
          "start       :  sawdigit   : {|d/|d}    sawcomma :  {,/,}\n" +
-         "sawdigit :    {}\n" +
+         "sawdigit :    sawcomma:{}\n" +
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
@@ -118,7 +118,7 @@ public class FSMTest {
          "OUTPUT_ALPHABET: |d\n" +
          "\n" +
          "start       :  sawdigit   : {5}    sawcomma :  {,}\n" +
-         "sawdigit :    {}\n" +
+         "sawdigit :    sawcomma:{}\n" +
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
@@ -138,7 +138,7 @@ public class FSMTest {
          "\n" +
          "\n" +
          "start         sawdigit   : {5}    sawcomma :  {,}\n" +
-         "sawdigit :    {}\n" +
+         "sawdigit :    sawcomma:{}\n" +
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
