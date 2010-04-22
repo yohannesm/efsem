@@ -23,6 +23,7 @@ public class Alphabet{
 	}
 	
 	public boolean validAlphabet() {
+	  if ( characters.length() < 1 ) return false;
 	  for (int i = 0; i < characters.length(); i++) {
 	    char testChar = characters.charAt(i);
 	    if ( !defA.contains(String.valueOf(testChar)) ) return false;
