@@ -79,6 +79,7 @@ public class FSMTest {
         assertEquals(testMachine.getOutput(), "0123456789");
         testMachine.reset();
         testMachine.run(",52312");
+        System.out.println(testMachine);
         assertEquals(testMachine.getOutput(), ",");
         
     }
