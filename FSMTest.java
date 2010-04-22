@@ -20,7 +20,7 @@ public class FSMTest {
          "sawcomma!   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        assertNotNull(testMachine)
+        assertNotNull(testMachine);
         assertEquals(testMachine.getMachineType(), "MOORE");
         assertEquals(testMachine.getInputAlphabet().toString(), "0123456789,");
         assertEquals(testMachine.getStartState(), "start");
@@ -72,7 +72,7 @@ public class FSMTest {
          
         Machine testMachine = FSM.parseMachine(testParse);
         System.out.println(testMachine);
-        assertNotNull(testMachine)
+        assertNotNull(testMachine);
         assertEquals("MEALY", testMachine.getMachineType());
         assertEquals("0123456789,", testMachine.getInputAlphabet().toString());
         assertEquals("start", testMachine.getStartState());
