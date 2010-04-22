@@ -417,7 +417,9 @@ public static Machine parseMachine(String input){
 	        for (int i = 0; i < transitions.length; i++) {
 	        	String transition[] = transitions[i].split("(\\s)*:(\\s)*\\{");
 	        	nextState = transition[0];
+	        	if (transition.length >= 2) {
 	        	String [] pairs = transition[1].split("\\,(\\s)+");
+	        	
 	        	for (int j = 0; j < pairs.length; j++) { 
 	        	 if (pairs[j].length() == 1) {
 	        	        if ( !input_alphabet.valid(pairs[j].charAt(0)) ) {
@@ -476,7 +478,7 @@ public static Machine parseMachine(String input){
 	        	   }
 	        	   
 	        	 }
-	        	 
+	        	 }
 	        	 }
 	        	 
 	        }
