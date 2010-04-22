@@ -16,6 +16,7 @@ public abstract class Machine{
      public abstract Alphabet getInputAlphabet();
      public abstract String getStartState();
      
+     public abstract String toString();
 
      public String name(){
            return name;
