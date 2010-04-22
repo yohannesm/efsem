@@ -26,10 +26,10 @@ public class FSMTest {
         
         testMachine.run("6345");
         
-        assertEquals(testMachine.getOutput(), "ACCEPTS");
+        assertEquals("ACCEPTS", testMachine.getOutput());
         testMachine.reset();
         testMachine.run(",52312");
-        assertEquals(testMachine.getOutput(), "REJECTS"); 
+        assertEquals("REJECTS", testMachine.getOutput()); 
     }
     @Test
     public void testMachineParse2() {
@@ -49,7 +49,7 @@ public class FSMTest {
          "sawcomma!   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        assertEquals(testMachine, null)
+        assertEquals(null, testMachine)
     }
     @Test
     public void testMachineParse3() {
@@ -71,18 +71,18 @@ public class FSMTest {
          
         Machine testMachine = FSM.parseMachine(testParse);
         System.out.println(testMachine);
-        assertEquals(testMachine.getMachineType(), "MEALY");
-        assertEquals(testMachine.getInputAlphabet().toString(), "0123456789,");
-        assertEquals(testMachine.getStartState(), "start");
+        assertEquals("MEALY", testMachine.getMachineType());
+        assertEquals("0123456789," testMachine.getInputAlphabet().toString());
+        assertEquals("start", testMachine.getStartState());
         
         
         
         testMachine.run("6345");
         
-        assertEquals(testMachine.getOutput(), "0123456789");
+        assertEquals("0123456789,", testMachine.getOutput());
         testMachine.reset();
         testMachine.run(",52312");
-        assertEquals(testMachine.getOutput(), ",");
+        assertEquals(",", testMachine.getOutput());
         
     }
     @Test
@@ -104,7 +104,7 @@ public class FSMTest {
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        assertEquals(testMachine, null);
+        assertEquals(null, testMachine);
     }
     @Test
     public void testMachineParse5() {
@@ -125,7 +125,7 @@ public class FSMTest {
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        assertEquals(testMachine, null);
+        assertEquals(null, testMachine);
     }
     @Test
     public void testMachineParse6() {
@@ -145,6 +145,6 @@ public class FSMTest {
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        assertEquals(testMachine, null);
+        assertEquals(null, testMachine);
     }
 }
