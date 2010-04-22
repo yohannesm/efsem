@@ -21,6 +21,7 @@ public class Mealy extends Machine{
      public String getCurrentState() { return currentState; }
      public int getStepNumber() { return stepNumber; }
      public boolean isValidInput() { return !invalidInput; }
+     public String getMachineType() { return "MEALY"; }
    
    public Mealy(String name1, ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, Pair<String, String> > t1, String s2){
 	states = s1;
