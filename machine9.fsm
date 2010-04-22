@@ -3,7 +3,7 @@ machine9
 INPUT_ALPHABET	:	01#
 OUTPUT_ALPHABET	:       01
 MACHINE_TYPE	:	MEALY
-STARTING_STATE	:       Start
+STARTING_STATE	:       NCNE 
 
 NCNE		:	NCNEZero:{0/} NCNeOne:{1/} NC1EChar:(#/)
 NCNEZero	:	NCNE:{0/0, 1/1} C2E:{#/0}
