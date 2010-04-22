@@ -40,7 +40,7 @@ public static Machine parseMachine(String input){
    for (nameFound = false; !nameFound && line < lines.length; line++) {
      String testLine = lines[line];
      m = ws.matcher(testLine );
-     if (!m.matches() ) {
+     if (!m.matches() && !testLine.equals("")) {
        testLine = testLine.trim();
        name = testLine;
        nameFound = true;
@@ -217,8 +217,14 @@ public static Machine parseMachine(String input){
       
    
    for(; line < lines.length; line++) {
-    
+        
         String testLine = lines[line];
+        m = MealyTransition.matcher(testLine);
+        if ( !m.matches() ) {
+        	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
+        		+ "LINE " + String.valueOf(line + 1));
+        	return null;
+        }
         
    	m = a.matcher(testLine);
    	
@@ -246,7 +252,7 @@ public static Machine parseMachine(String input){
 	        	  if ( pairs[j].length() > 0 && pairs[j].charAt(0) != '|' ) {
 	        	        if ( pairs[j].length() < 1 || (pairs[j].length() >= 2 
 	        	        		&& pairs[j].charAt(1) != '/' )) {
-	        	          System.out.println("FSM FILE ERROR: " + name + " : IaNVALID FORMATTING ON "
+	        	          System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
 	        	          		+ "LINE " + String.valueOf(line + 1));
 	        	          return null;
 	        	        }
@@ -278,7 +284,7 @@ public static Machine parseMachine(String input){
 	        		Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
 	        		transitionFunction.put(strChr, strStr);	        		
 	        	   }
-	        	 if ( pairs[j].length() > 0 && pairs[j].charAt(0) == '/' ) {
+	        	 if ( pairs[j].length() > 0 && pairs[j].charAt(0) == '|' ) {
 	        	        if ( pairs[j].length() < 2 || (pairs[j].length() >= 3 
 	        	        	&& pairs[j].charAt(2) != '/') ) {
 	        	 	  System.out.println("FSM FILE ERROR: " + name + " : INVALID FaORMATTING ON "
@@ -378,7 +384,12 @@ public static Machine parseMachine(String input){
    for(; line < lines.length; line++) {
     
         String testLine = lines[line];
-        
+        m = MooreTransition.matcher(testLine);
+        if ( !m.matches() ) {
+        	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
+        		+ "LINE " + String.valueOf(line + 1));
+        	return null;
+        }
    	m = alphaNumeric.matcher(testLine);
    	
    	if (m.find() ) {
