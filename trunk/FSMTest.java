@@ -32,6 +32,7 @@ public class FSMTest {
         testMachine.run(",52312");
         assertEquals("REJECTS", testMachine.getOutput()); 
     }
+    /*
     @Test
     public void testMachineParse2() {
         String testParse = new String(
@@ -50,7 +51,7 @@ public class FSMTest {
          "sawcomma!   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        //assertNull(testMachine);
+        assertNull(testMachine);
     }
     @Test
     public void testMachineParse3() {
@@ -149,4 +150,5 @@ public class FSMTest {
         Machine testMachine = FSM.parseMachine(testParse);
         assertNull(testMachine);
     }
+    */
 }
