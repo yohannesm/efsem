@@ -36,7 +36,7 @@ public class Alphabet{
 	}
 
         public boolean valid(char testChar) {
-	  return characters.contains(String.valueOf(testChar));
+	  return characters.contains(String.valueOf(testChar)) && validAlphabet();
         }
         
         public boolean valid(String testString) {
@@ -51,7 +51,7 @@ public class Alphabet{
 	}
 
 	public static void main(String[] args) {
-	  Alphabet test1 = new Alphabet();
+	/*  Alphabet test1 = new Alphabet();
           Alphabet test2 = new Alphabet("|d");
           Alphabet test3 = new Alphabet("01");
 
@@ -63,7 +63,9 @@ public class Alphabet{
           System.out.println(test2.valid('5'));
 	  System.out.println(test3.valid('c'));
 	  System.out.println(test3.valid('1'));
-	  System.out.println(test3.valid('5'));
-
-	}//end main
-}//end Alphabet
+	  System.out.println(test3.valid('5')); */
+                
+	}
+	//end main
+}
+//end Alphabet
