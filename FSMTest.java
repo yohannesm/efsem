@@ -70,16 +70,18 @@ public class FSMTest {
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
+        System.out.println(testMachine);
         assertEquals(testMachine.getMachineType(), "MEALY");
         assertEquals(testMachine.getInputAlphabet().toString(), "0123456789,");
         assertEquals(testMachine.getStartState(), "start");
+        
+        
         
         testMachine.run("6345");
         
         assertEquals(testMachine.getOutput(), "0123456789");
         testMachine.reset();
         testMachine.run(",52312");
-        System.out.println(testMachine);
         assertEquals(testMachine.getOutput(), ",");
         
     }
