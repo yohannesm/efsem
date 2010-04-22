@@ -1,13 +1,13 @@
 machine7
 
-INPUT_ALPHABET	:	|s|d
+
 MACHINE_TYPE	:	MOORE
 STARTING_STATE	:       Start
 
 
-Start		:	OneParen:{{} Rejecting:{}} Start:{|d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
-OneParen	:	TwoParen:{{} Balanced:{}} OneParen:{|d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
-TwoParen	:	ThrParen:{{} OneParen:{}} TwoParen:{|d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
-ThrParen	:	Rejecting:{{} TwoParen:{}} ThrParen:{|d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
-Balanced$	:	OneParen:{{} Rejecting:{}} Balanced:{|d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+Start		:	OneParen:{{} Rejecting:{}} Start:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+OneParen	:	TwoParen:{{} Balanced:{}} OneParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+TwoParen	:	ThrParen:{{} OneParen:{}} TwoParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+ThrParen	:	Rejecting:{{} TwoParen:{}} ThrParen:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
+Balanced$	:	OneParen:{{} Rejecting:{}} Balanced:{|a, |d, ., ,, ~, !, @, #, $, %, ^, &, -, +}
 Rejecting!	:
