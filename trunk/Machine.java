@@ -13,6 +13,8 @@ public abstract class Machine{
      
      public abstract String getMachineType();
      public abstract String getOutput();
+     public abstract Alphabet getInputAlphabet();
+     public abstract String getStartState();
      
 
      public String name(){
