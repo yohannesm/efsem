@@ -245,8 +245,10 @@ public static Machine parseMachine(String input){
 	        }
 	        if (stringLen > 0) {
 	        for (int i = 0; i < transitions.length; i++) {
-	        	String transition[] = transitions[i].split("(\\s)*:(\\s)*\\{");
+	        	String transition[] = transitions[i].split("(\\s)*:(\\s)*\\{");        	
 	        	nextState = transition[0];
+	        	
+	        	if (transition.length >= 2) {
 	        	String [] pairs = transition[1].split("\\,(\\s)+");
 	        	for (int j = 0; j < pairs.length; j++) {
 	        	  if ( pairs[j].length() > 0 && pairs[j].charAt(0) != '|' ) {
@@ -332,7 +334,7 @@ public static Machine parseMachine(String input){
 	         		 Pair<String, String> strStr = new Pair<String, String>(nextState, outputString);
 	        		 transitionFunction.put(strChr, strStr);
 	        	 	}
-	        	 }
+	        	 }}
 	        	}}
 	        }
 	   ArrayList< Character > deterministicCheck = new ArrayList<Character> ();
