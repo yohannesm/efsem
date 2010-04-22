@@ -13,6 +13,14 @@ public class Mealy extends Machine{
      private StringBuffer output;
      private int stepNumber;
      boolean invalidInput;
+     
+     public ArrayList<String> getStates() { return states; }
+     public Alphabet getInputAlphabet() { return inputAlpha; }
+     public HashMap<Pair<String, Character>, Pair<String, String> > getTransitionFunction() { return trans; }
+     public String getStartState() { return startState; }
+     public String getCurrentState() { return currentState; }
+     public int getStepNumber() { return stepNumber; }
+     public boolean isValidInput() { return !invalidInput; }
    
    public Mealy(String name1, ArrayList<String> s1, Alphabet a1, HashMap<Pair<String, Character>, Pair<String, String> > t1, String s2){
 	states = s1;
