@@ -7,5 +7,5 @@ STARTING_STATE	:       Start
 Start		:	StartZero:{0} NonZero:{|n} InvalidInput:{|a, |s}
 StartZero$	:       InvalidInput:{|d, |a, |s}
 InvalidInput!	:
-NonZero$	:	NonZero:{|d} InvalidInput:{|a, |s}
+NonZero$	:	NonZero   :    {|d}    InvalidInput:{|a, |s}
 

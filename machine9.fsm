@@ -8,6 +8,7 @@ STARTING_STATE	:       NCNE
 NCNE		:	NCNEZero:{0/} NCNEOne:{1/} NC1EChar:{#/}
 NCNEZero	:	NCNE:{0/0, 1/1} C2E:{#/0}
 NCNEOne		:	NCNE:{0/1} CNE:{1/0} C2E:{#/1}
+
 CNE		:	CNEZero:{0/} CNEOne:{1/} C1EChar:{#/}
 CNEZero		:       NCNE:{0/1} CNE:{1/0} NC2E:{#/1}
 CNEOne		:	CNE:{0/0, 1/1} C2E:{#/0}

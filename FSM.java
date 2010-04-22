@@ -69,7 +69,7 @@ public static Machine parseMachine(String input){
    Pattern macMatch = Pattern.compile("(\\s)*MACHINE_TYPE(\\s)*:(\\s)*(\\S)+(\\s)*");
    Pattern startMatch = Pattern.compile("(\\s)*STARTING_STATE(\\s)*:(\\s)*(\\S)+(\\s)*");
    Pattern MealyTransition = Pattern.compile("(\\s)*(\\w)+(\\s)*:(\\s)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+/(\\S)*\\,(\\s)+)*((\\S)+/(\\S)*)?\\}(\\s)+)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+/(\\S)*\\,(\\s)+)*((\\S)+/(\\S)*)?\\}(\\s)*)?");
-   Pattern MooreTransition = Pattern.compile("(\\s)*(\\w)+(\\s)*:(\\s)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+\\,(\\s)+)*((\\S)+)?\\}(\\s)+)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+\\,(\\s)+)*((\\S)+)?\\}(\\s)*)?");
+   Pattern MooreTransition = Pattern.compile("(\\s)*(\\w)+(\\$|\\!|\\$\\!|\\!\\$)?(\\s)*:(\\s)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+\\,(\\s)+)*((\\S)+)?\\}(\\s)+)*((\\w)+(\\s)*:(\\s)*\\{((\\S)+\\,(\\s)+)*((\\S)+)?\\}(\\s)*)?");
    Pattern colonMatch = Pattern.compile("(\\s)*:(\\s)*");
    Pattern alphaNumeric = Pattern.compile("(\\w)+");
 
@@ -220,7 +220,7 @@ public static Machine parseMachine(String input){
         
         String testLine = lines[line];
         m = MealyTransition.matcher(testLine);
-        if ( !m.matches() ) {
+        if ( !m.matches() && !testLine.trim().equals("")) {
         	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
         		+ "LINE " + String.valueOf(line + 1));
         	return null;
@@ -385,7 +385,7 @@ public static Machine parseMachine(String input){
     
         String testLine = lines[line];
         m = MooreTransition.matcher(testLine);
-        if ( !m.matches() ) {
+        if (!m.matches() && !testLine.trim().equals("") ) {
         	System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
         		+ "LINE " + String.valueOf(line + 1));
         	return null;
