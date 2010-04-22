@@ -1,6 +1,7 @@
 import org.junit.* ;
 import static org.junit.Assert.*;
 
+//David is driving
 public class FSMTest {
     @Test
     public void testMachineParse1() {
@@ -32,7 +33,7 @@ public class FSMTest {
         testMachine.run(",52312");
         assertEquals("REJECTS", testMachine.getOutput()); 
     }
-    /*
+    
     @Test
     public void testMachineParse2() {
         String testParse = new String(
@@ -53,6 +54,7 @@ public class FSMTest {
         Machine testMachine = FSM.parseMachine(testParse);
         assertNull(testMachine);
     }
+    
     @Test
     public void testMachineParse3() {
         String testParse = new String(
@@ -72,17 +74,15 @@ public class FSMTest {
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
-        System.out.println(testMachine);
         assertNotNull(testMachine);
         assertEquals("MEALY", testMachine.getMachineType());
         assertEquals("0123456789,", testMachine.getInputAlphabet().toString());
-        assertEquals("start", testMachine.getStartState());
-        
+        assertEquals("start", testMachine.getStartState());   
         
         
         testMachine.run("6345");
         
-        assertEquals("0123456789,", testMachine.getOutput());
+        assertEquals("0123456789", testMachine.getOutput());
         testMachine.reset();
         testMachine.run(",52312");
         assertEquals(",", testMachine.getOutput());
@@ -98,15 +98,16 @@ public class FSMTest {
          "MACHINE_TYPE     :     MEALY\n" +
          "\n" +
          "STARTING_STATE:start\n" +
-         "INPUT_ALPHABET:  |d,\n" +
+         "INPUT_ALPHABET:  |da\n" +
          "\n" +
          "OUTPUT_ALPHABET: |d\n" +
          "\n" +
-         "start       :  sawdigit   : {|d/|d}    sawcomma :  {,/,}\n" +
+         "start       :  sawdigit   : {|d/|d}    sawcomma :  {a/a}\n" +
          "sawdigit :    sawcomma:{}\n" +
          "sawcomma   :  ");
          
         Machine testMachine = FSM.parseMachine(testParse);
+        System.out.println(testMachine);
         assertNull(testMachine);
     }
     @Test
@@ -150,5 +151,5 @@ public class FSMTest {
         Machine testMachine = FSM.parseMachine(testParse);
         assertNull(testMachine);
     }
-    */
+    
 }

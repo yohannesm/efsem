@@ -2,6 +2,21 @@ import java.util.*;
 import java.io.*;
 import java.util.regex.*;
 
+/* Pair programming log:
+
+4/8,  6:45pm - 8:45pm, David and Marcell, 4 hours
+4/15, 6:45pm - 8:45pm, David and Marcell, 4 hours
+4/16, 1:15pm - 4:15pm, David and Marcell, 6 hours
+4/19, 6:00pm - 8:00pm, David and Marcell, 4 hours
+4/20, 2:10pm - 3:10pm, David,             1 hour
+4/20, 3:10pm - 4:10pm, David and Marcell, 2 hours
+4/21, 2:45pm - 3:45pm, David,             1 hour
+4/22, 11:00pm-12:00pm, David,             1 hour
+4/22, 2:00pm - 3:00pm, David,	          1 hour
+4/22, 3:00pm - 7:00pm, David and Marcell, 8 hours
+total time 32 hours, 28 hours of pair programming
+*/
+
 //Marcell is driving
 public class FSM  {
       
@@ -270,7 +285,7 @@ public static Machine parseMachine(String input){
 	        	          return null;
 	        	        }
 	        		inputChar = new Character(pairs[j].charAt(0));
-	        		outputString = pairs[j].substring(3);
+	        		outputString = pairs[j].substring(2);
 	        		 outputString = outputString.replace("|a", "|l|u");
 	        		 outputString = outputString.replace("|l", "abcdefghijklmnopqrstuvwxyz");
 	        		 outputString = outputString.replace("|u", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -289,7 +304,7 @@ public static Machine parseMachine(String input){
 	        	 if ( pairs[j].length() > 0 && pairs[j].charAt(0) == '|' ) {
 	        	        if ( pairs[j].length() < 2 || (pairs[j].length() >= 3 
 	        	        	&& pairs[j].charAt(2) != '/') ) {
-	        	 	  System.out.println("FSM FILE ERROR: " + name + " : INVALID FaORMATTING ON "
+	        	 	  System.out.println("FSM FILE ERROR: " + name + " : INVALID FORMATTING ON "
 	        	 	  	+ "LINE " + String.valueOf(line + 1));
 	        	 	  return null;
 	        	 		}
